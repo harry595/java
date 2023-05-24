@@ -22,9 +22,23 @@ public class HttpSender {
 			httpClient.start();
 			
 			Request request = httpClient.newRequest(targetUrl).method("GET");
+			request.header("x-requestId", "test");
+			
+//			만약 Request가 온 그대로 다시 보내 줄 경우의 get 파라미터 코드
+//			if(queryString != null) {
+//				String[] queryParams = queryString.split("&");
+//				for(String param : queryParams) {
+//					String[] keyValue = param.split("=");
+//					if(keyValue.length == 2) {
+//						String paramName = keyValue[0];
+//						String paramValue = keyValue[1];
+//						request.param(paramName, paramValue); // -> Get의 파라미터
+//					}
+//				}
+//			}
+			
 			ContentResponse response = request.send();
 			
-			System.out.println(response.getContentAsString());
 			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +64,6 @@ public class HttpSender {
 			
 			ContentResponse response = request.send();
 			
-			System.out.println(response.getContentAsString());
 			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
